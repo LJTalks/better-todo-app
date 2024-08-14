@@ -1,4 +1,4 @@
-document.getElementById('generateBtn').addEventListener('click', function() {
+document.getElementById('generateBtn').addEventListener('click', function () {
     const keyword = document.getElementById('keywordInput').value.trim();
     if (keyword) {
         generateIdea(keyword);
@@ -29,21 +29,31 @@ function displayIdea(idea) {
 
 function displayIdea(idea) {
     const ideasContainer = document.getElementById('ideasContainer');
+
     const ideaItem = document.createElement('div');
     ideaItem.className = 'idea-item';
+
     ideaItem.innerHTML = `
         <span>${idea}</span>
+        <button class="copyBtn">Copy</button>
         <button class="saveBtn">Save</button>
         <button class="editBtn">Edit</button>
         <button class="deleteBtn">Delete</button>
     `;
-    
+
     ideasContainer.appendChild(ideaItem);
 
     // Add event listeners for the buttons
+    ideaItem.querySelector('.copyBtn').addEventListener('click', copyIdea);
     ideaItem.querySelector('.saveBtn').addEventListener('click', saveIdea);
     ideaItem.querySelector('.editBtn').addEventListener('click', editIdea);
     ideaItem.querySelector('.deleteBtn').addEventListener('click', deleteIdea);
+}
+
+function copyIdea(event) {
+    // Logic to copy the idea (e.g., copy to clipboard)
+    const idea = event.target.parentElement.querySelector('span').textContent;
+    console.log(`Copying idea: ${idea}`);
 }
 
 function saveIdea(event) {
